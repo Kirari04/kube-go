@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-deployment
+  labels:
+    app: webapp
+spec:
+  # replicas: 2
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers:
+      - name: webapp
+        image: kube-go:v1
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 1323
+        resources:
+          limits:
+            memory: 10Mi
+            # cpu: 20m # bad practice
+          requests:
+            memory: 5Mi
+            cpu: 10m
